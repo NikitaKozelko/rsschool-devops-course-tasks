@@ -20,19 +20,19 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         	   = "rss-task-1-bucket"
-    key                = "state/terraform.tfstate"
-    region         	   = "eu-central-1"
-    encrypt        	   = true
+    bucket  = "rss-task-1-bucket"
+    key     = "state/terraform.tfstate"
+    region  = "eu-central-1"
+    encrypt = true
   }
- }
+}
 
 resource "aws_iam_openid_connect_provider" "github_oidc" {
   url = "https://token.actions.githubusercontent.com"
 
   client_id_list = ["sts.amazonaws.com"]
 
-  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]  # Thumbprint for GitHub OIDC provider
+  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"] # Thumbprint for GitHub OIDC provider
 }
 
 resource "aws_iam_role" "GithubActionsRole" {
@@ -42,17 +42,17 @@ resource "aws_iam_role" "GithubActionsRole" {
     Version = "2012-10-17",
     Statement = [
       {
-        "Effect": "Allow",
-        "Principal": {
-          "Federated": "arn:aws:iam::952257814712:oidc-provider/token.actions.githubusercontent.com"
+        "Effect" : "Allow",
+        "Principal" : {
+          "Federated" : "arn:aws:iam::952257814712:oidc-provider/token.actions.githubusercontent.com"
         },
-        "Action": "sts:AssumeRoleWithWebIdentity",
-        "Condition": {
-          "StringEquals": {
-                  "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Condition" : {
+          "StringEquals" : {
+            "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"
           },
-          "StringLike": {    
-            "token.actions.githubusercontent.com:sub": "repo:NikitaKozelko/rsschool-devops-course-tasks:*"
+          "StringLike" : {
+            "token.actions.githubusercontent.com:sub" : "repo:NikitaKozelko/rsschool-devops-course-tasks:*"
           }
         }
       }
