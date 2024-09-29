@@ -7,18 +7,16 @@ provider "aws" {
 resource "aws_s3_bucket" "rss-task-1-bucket" {
   bucket = "rss-task-1-bucket"
   acl    = "private"
-  versioning {
-    enabled = true
+}
+
+resource "aws_s3_bucket_versioning" "rss-task-1-bucket-versioning" {
+  bucket = aws_s3_bucket.rss-task-1-bucket.bucket
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
 terraform {
-  # required_providers {
-  #   aws = {
-  #     source  = "hashicorp/aws"
-  #     version = "~> 4.18.0"
-  #   }
-  # }
   backend "s3" {
     bucket  = "rss-task-1-bucket"
     key     = "state/terraform.tfstate"
@@ -32,7 +30,7 @@ resource "aws_iam_openid_connect_provider" "github_oidc" {
 
   client_id_list = ["sts.amazonaws.com"]
 
-  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"] # Thumbprint for GitHub OIDC provider
+  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
 }
 
 resource "aws_iam_role" "GithubActionsRole" {
