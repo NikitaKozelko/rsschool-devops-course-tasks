@@ -10,6 +10,7 @@ on:
 
 env:
   AWS_REGION: eu-central-1
+  AWS_ROLE_WITH_WEB_IDENTITY: arn:aws:iam::952257814712:role/GithubActionsRole
 
 permissions:
   id-token: write
@@ -42,7 +43,7 @@ jobs:
       - name: Configure AWS credentials for Terraform
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::952257814712:role/GithubActionsRole
+          role-to-assume: ${{ env.AWS_ROLE_WITH_WEB_IDENTITY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Initialize Terraform
@@ -64,7 +65,7 @@ jobs:
       - name: Configure AWS credentials for Terraform
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::952257814712:role/GithubActionsRole
+          role-to-assume: ${{ env.AWS_ROLE_WITH_WEB_IDENTITY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Initialize Terraform
