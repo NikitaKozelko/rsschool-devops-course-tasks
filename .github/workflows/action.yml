@@ -41,7 +41,7 @@ jobs:
         #   terraform_version: ${{ env.TF_VERSION }}
 
       - name: Configure AWS credentials for Terraform
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::952257814712:role/GithubActionsRole  # Replace with your role ARN
           aws-region: ${{ env.AWS_REGION }}
