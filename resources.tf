@@ -1,10 +1,10 @@
-resource "aws_s3_bucket" "rss-task-1-bucket" {
-  bucket = "rss-task-1-bucket"
+resource "aws_s3_bucket" "rss-task-2-bucket" {
+  bucket = "rss-task-2-bucket"
   acl    = "private"
 }
 
-resource "aws_s3_bucket_versioning" "rss-task-1-bucket-versioning" {
-  bucket = aws_s3_bucket.rss-task-1-bucket.bucket
+resource "aws_s3_bucket_versioning" "rss-task-2-bucket-versioning" {
+  bucket = aws_s3_bucket.rss-task-2-bucket.bucket
   versioning_configuration {
     status = "Enabled"
   }
