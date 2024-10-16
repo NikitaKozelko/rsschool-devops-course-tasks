@@ -1,5 +1,5 @@
 resource "aws_eip" "nat_gateway" {
-  vpc = true
+  vpc                       = true
   associate_with_private_ip = "10.0.0.5"
   depends_on                = [aws_internet_gateway.terraform-lab-igw]
 }

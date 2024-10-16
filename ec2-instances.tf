@@ -1,5 +1,5 @@
 resource "aws_instance" "ec2_public_instance-subnet-1" {
-  ami = data.aws_ami.amazon_linux.id
+  ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
 
   subnet_id = aws_subnet.public-subnet-1.id
@@ -14,7 +14,7 @@ resource "aws_instance" "ec2_public_instance-subnet-1" {
 }
 
 resource "aws_instance" "ec2_public_instance-subnet-2" {
-  ami = data.aws_ami.amazon_linux.id
+  ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
 
   subnet_id = aws_subnet.public-subnet-2.id
@@ -29,7 +29,7 @@ resource "aws_instance" "ec2_public_instance-subnet-2" {
 }
 
 resource "aws_instance" "ec2_private_instance-subnet-1" {
-  ami = data.aws_ami.amazon_linux.id
+  ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
 
   subnet_id = aws_subnet.private-subnet-1.id
@@ -44,7 +44,7 @@ resource "aws_instance" "ec2_private_instance-subnet-1" {
 }
 
 resource "aws_instance" "ec2_private_instance-subnet-2" {
-  ami = data.aws_ami.amazon_linux.id
+  ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
 
   subnet_id = aws_subnet.private-subnet-2.id
