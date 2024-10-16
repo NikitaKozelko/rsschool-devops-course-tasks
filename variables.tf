@@ -1,5 +1,6 @@
 variable "region" { default = "eu-central-1" }
 
+# lighweith AMI "AWS Amazon Linux 2"
 variable "ec2_default_ami" { default = "amzn2-ami-hvm-*-x86_64-gp2" }
 
 variable "vpc_cidr" {
