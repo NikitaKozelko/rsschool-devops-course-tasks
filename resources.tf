@@ -114,3 +114,65 @@ resource "aws_route_table_association" "public-route-2-association" {
   route_table_id = aws_route_table.public-route-table.id
   subnet_id      = aws_subnet.public-subnet-2.id
 }
+
+# Security group for EC2
+resource "aws_security_group" "ec2_security_group" {
+  name        = "ec2-security-group"
+  description = "Allow SSH and HTTP traffic"
+  vpc_id      = aws_vpc.terraform-lab-vpc.id
+
+  # Allow ssh access
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # from everywhere
+  }
+
+  # Allow HTTP
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # from everywhere
+  }
+
+  # Allow all out traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "ec2-security-group"
+  }
+}
+
+# find lighweith AMI "AWS Amazon Linux 2"
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-x86_64-gp2"]
+  }
+}
+
+# Create ec2 instance
+resource "aws_instance" "ec2_public_instance" {
+  ami = data.aws_ami.amazon_linux.id
+  instance_type = "t2.micro"
+
+  subnet_id = aws_subnet.public-subnet-1.id
+
+  associate_public_ip_address = true
+
+  security_groups = [aws_security_group.ec2_security_group.name]
+
+  tags = {
+    Name = "public-ec2-instance"
+  }
+}
