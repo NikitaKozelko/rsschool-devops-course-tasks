@@ -157,7 +157,7 @@ data "aws_ami" "amazon_linux" {
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-x86_64-gp2"]
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
   }
 }
 
@@ -170,7 +170,7 @@ resource "aws_instance" "ec2_public_instance" {
 
   associate_public_ip_address = true
 
-  security_groups = [aws_security_group.ec2_security_group.name]
+  security_groups = [aws_security_group.ec2_security_group.id]
 
   tags = {
     Name = "public-ec2-instance"
