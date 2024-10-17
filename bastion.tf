@@ -16,7 +16,7 @@ resource "aws_instance" "bastion_host" {
 }
 
 resource "aws_security_group" "ec2_bastion_security_group" {
-  name        = "ec2-security-group"
+  name        = "ec2_bastion_security_group"
   description = "Allow SSH and HTTP traffic"
   vpc_id      = aws_vpc.terraform-lab-vpc.id
 
@@ -53,6 +53,6 @@ resource "aws_security_group" "ec2_bastion_security_group" {
   }
 
   tags = {
-    Name = "ec2-security-group"
+    Name = "ec2_bastion_security_group"
   }
 }
