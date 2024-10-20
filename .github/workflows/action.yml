@@ -50,7 +50,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -var "ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"
 
   terraform-apply:
     runs-on: ubuntu-latest
