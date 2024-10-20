@@ -1,6 +1,7 @@
 resource "aws_key_pair" "EC2-instance_key" {
   key_name = "K8s-EC2-ssh-key"
-  public_key = file("${path.module}/my-aws-key.pub")
+  # public_key = file("${path.module}/my-aws-key.pub")
+  public_key = var.ssh_public_key
 }
 
 resource "aws_instance" "ec2_public_instance-subnet-1" {

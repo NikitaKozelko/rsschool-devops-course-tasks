@@ -67,8 +67,9 @@ jobs:
         with:
           role-to-assume: ${{ env.AWS_ROLE_WITH_WEB_IDENTITY }}
           aws-region: ${{ env.AWS_REGION }}
-          
+
       - name: Initialize Terraform
         run: terraform init
+
       - name: Apply Terraform
-        run: terraform apply -auto-approve 
+        run: terraform apply -auto-approve -var "ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"

@@ -33,3 +33,8 @@ variable "availability_zones" {
   type        = list(string)
   default     = ["eu-central-1a", "eu-central-1b"]
 }
+
+variable "ssh_public_key" {
+  description = "SSH public key for accessing the EC2 instance"
+  type        = string
+}
