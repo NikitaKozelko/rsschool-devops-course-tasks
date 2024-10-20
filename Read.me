@@ -1,6 +1,39 @@
 # Purpose of that PR 
 Implement a solution that cover requirements from the task https://github.com/rolling-scopes-school/tasks/blob/master/devops/modules/1_basic-configuration/task_2.md
 
+Terraform Infrastructure Configuration
+This repository contains Terraform code for provisioning infrastructure resources. Follow the instructions below to set up and manage the infrastructure using Terraform.
+
+Prerequisites
+Before using this repository, ensure that you have the following tools installed:
+
+Terraform: Install Terraform
+AWS CLI (if using AWS): Install AWS CLI
+SSH Key: Ensure you have an SSH key generated and available for use.
+Getting Started
+1. Initialize Terraform
+The first step to working with Terraform is to initialize your project. This will download the necessary provider plugins and set up your working directory.
+```
+terraform init
+```
+terraform init: This command sets up your Terraform environment by downloading necessary provider plugins (e.g., AWS, Azure, GCP) and initializing the backend if configured.
+2. Plan the Infrastructure Changes
+Before making any actual changes to the infrastructure, you should review the execution plan using the terraform plan command. This will show what actions Terraform will perform when you apply the configuration.
+
+```
+terraform plan -var "ssh_public_key=$(cat ~/.ssh/id_rsa.pub)"
+```
+terraform plan: This command generates an execution plan based on the current state of your infrastructure and the Terraform configuration files. It shows which resources will be created, modified, or destroyed.
+-var: The -var option is used to pass any required variables, such as your SSH public key, which might be needed by your configuration.
+3. Apply the Infrastructure Changes
+Once you're satisfied with the plan, you can apply the changes to your infrastructure using the terraform apply command.
+
+```
+terraform apply -var "ssh_public_key=$(cat ~/.ssh/id_rsa.pub)"
+```
+terraform apply: This command applies the planned changes to the actual infrastructure. It will prompt you for confirmation before proceeding.
+You can pass necessary variables using -var flags, similar to how it's done in the plan command.
+
 # Inspiration
 A lot of base information was taken from the tutorial https://medium.com/@prabhupj/terraform-way-to-run-aws-ec2-instances-in-a-private-subnet-and-load-balancing-with-an-application-98da5a11d4f1.
 
