@@ -1,0 +1,75 @@
+name: Terraform Action
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  AWS_REGION: eu-central-1
+  AWS_ROLE_WITH_WEB_IDENTITY: arn:aws:iam::952257814712:role/GithubActionsRole
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Format check with terraform fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+  # terraform-plan:
+  #   runs-on: ubuntu-latest
+  #   needs: terraform-check
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+
+  #     - name: Set up Terraform
+  #       uses: hashicorp/setup-terraform@v3
+
+  #     - name: Configure AWS credentials for Terraform
+  #       uses: aws-actions/configure-aws-credentials@v4
+  #       with:
+  #         role-to-assume: ${{ env.AWS_ROLE_WITH_WEB_IDENTITY }}
+  #         aws-region: ${{ env.AWS_REGION }}
+          
+  #     - name: Initialize Terraform
+  #       run: terraform init
+
+  #     - name: Terraform Plan
+  #       run: terraform plan -var "ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"
+
+  # terraform-apply:
+  #   runs-on: ubuntu-latest
+  #   needs: terraform-plan
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+
+  #     - name: Set up Terraform
+  #       uses: hashicorp/setup-terraform@v3
+
+  #     - name: Configure AWS credentials for Terraform
+  #       uses: aws-actions/configure-aws-credentials@v4
+  #       with:
+  #         role-to-assume: ${{ env.AWS_ROLE_WITH_WEB_IDENTITY }}
+  #         aws-region: ${{ env.AWS_REGION }}
+
+  #     - name: Initialize Terraform
+  #       run: terraform init
+
+  #     - name: Apply Terraform
+  #       run: terraform apply -auto-approve -var "ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"
