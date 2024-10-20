@@ -6,7 +6,7 @@ resource "aws_key_pair" "EC2-instance_key" {
 
 resource "aws_instance" "ec2_private_instance-subnet-1" {
   ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
 
   subnet_id = aws_subnet.private-subnet-1.id
 
@@ -22,7 +22,7 @@ resource "aws_instance" "ec2_private_instance-subnet-1" {
 
 resource "aws_instance" "ec2_private_instance-subnet-2" {
   ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
 
   subnet_id = aws_subnet.private-subnet-2.id
 

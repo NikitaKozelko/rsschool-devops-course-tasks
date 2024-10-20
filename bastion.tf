@@ -1,6 +1,6 @@
 resource "aws_instance" "bastion_host" {
   ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
 
   subnet_id = aws_subnet.public-subnet-1.id
 
