@@ -3,7 +3,7 @@ resource "aws_security_group" "ec2_security_group" {
   description = "Allow SSH and HTTP traffic"
   vpc_id      = aws_vpc.terraform-lab-vpc.id
 
-  # Allow ssh access
+  # Allow ssh access only to bastion host
   ingress {
     from_port   = 22
     to_port     = 22

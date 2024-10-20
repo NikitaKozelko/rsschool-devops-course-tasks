@@ -8,15 +8,6 @@ resource "aws_subnet" "public-subnet-1" {
   availability_zone = var.availability_zones[0]
 }
 
-resource "aws_subnet" "public-subnet-2" {
-  tags = {
-    Name = "public-terraform-lab-subnet-2"
-  }
-  cidr_block        = var.public_subnet_2_cidr
-  vpc_id            = aws_vpc.terraform-lab-vpc.id
-  availability_zone = var.availability_zones[1]
-}
-
 # Private subnets
 resource "aws_subnet" "private-subnet-1" {
   tags = {
