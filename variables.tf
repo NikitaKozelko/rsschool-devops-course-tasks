@@ -37,4 +37,5 @@ variable "availability_zones" {
 variable "ssh_public_key" {
   description = "SSH public key for accessing the EC2 instance"
   type        = string
+  sensitive = true
 }
